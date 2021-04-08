@@ -1,0 +1,8 @@
+version: '3'
+services:
+  edge_exporter:
+    build: .
+    container_name: edge_exporter
+    restart: unless-stopped
+    ports:
+      - "9321:9321"

@@ -1,0 +1,8 @@
+version: '3'
+services: 
+  iot_server:
+    build: .
+    container_name: iot_server
+    restart: unless-stopped
+    ports:
+      - "8010:8080"
