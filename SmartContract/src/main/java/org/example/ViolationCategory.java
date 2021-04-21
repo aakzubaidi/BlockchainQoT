@@ -10,12 +10,16 @@ public class ViolationCategory {
 
     @Property()
     private String categoryName;
+    
     @Property()
     private String providerKey;
+    
     @Property()
     private String penality;
+    
     @Property()
     private String maxTolerance;
+    
     @Property()
     private String violationRate;
     
