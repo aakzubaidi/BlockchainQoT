@@ -39,8 +39,8 @@ public class Metric {
     }
 
     public static Metric fromJSONString(String json) {
-        Metric asset = genson.deserialize(json, Metric.class);
-        return asset;
+        Metric metric = genson.deserialize(json, Metric.class);
+        return metric;
     }
 
     public String getName() {

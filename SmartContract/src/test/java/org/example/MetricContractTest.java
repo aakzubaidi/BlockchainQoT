@@ -156,19 +156,4 @@ public final class MetricContractTest {
 
     }
 
-    @Test
-    public void assetDelete() {
-        MetricContract contract = new  MetricContract();
-        Context ctx = mock(Context.class);
-        ChaincodeStub stub = mock(ChaincodeStub.class);
-        when(ctx.getStub()).thenReturn(stub);
-        when(stub.getState("10001")).thenReturn(null);
-
-        Exception thrown = assertThrows(RuntimeException.class, () -> {
-            contract.deleteMetric(ctx, "10001");
-        });
-
-        assertEquals(thrown.getMessage(), "The asset 10001 does not exist");
-    }
-
 }
