@@ -124,7 +124,8 @@ public class MetricContract implements ContractInterface {
         Boolean complianceStatus = true;
         Provider provider = Provider.fromJSONString(new String(ctx.getStub().getState(ProviderID), UTF_8));
 
-        if (Boolean.valueOf(provider.getValdityOfSLA())) {
+        //conneted for testing purposes// should be uncommented for production uses
+        //if (Boolean.valueOf(provider.getValdityOfSLA())) {
             if (!f && ts < 1 && !ae && ac) {
                 violationKey = "0002";
                 complianceStatus = false;
@@ -161,10 +162,10 @@ public class MetricContract implements ContractInterface {
                 ctx.getStub().putState(ProviderID, provider.toJSONString().getBytes(UTF_8));
 
             }
-        } else {
-            System.out.println("SLA has been terminated due to inaccaptable violation");
-            mesaage = "SLA has been terminated due to inaccaptable violation";
-        }
+        // } else {
+        //     System.out.println("SLA has been terminated due to inaccaptable violation");
+        //     mesaage = "SLA has been terminated due to inaccaptable violation";
+        // }
 
         return mesaage;
     }

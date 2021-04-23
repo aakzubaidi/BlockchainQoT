@@ -1,0 +1,31 @@
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+---
+- name: Create org1peer1
+  hosts: localhost
+  vars:
+    state: present
+    organization_name: "{{ org1_name }}"
+    organization_msp_id: "{{ org1_msp_id }}"
+    ca_name: "{{ org1_ca_name }}"
+    peer_name: "{{ org1_peer1_name }}"
+  vars_files:
+    - common-vars.yml
+    - org1-vars.yml
+  roles:
+    - ibm.blockchain_platform.endorsing_organization
+
+- name: Create org1peer2
+  hosts: localhost
+  vars:
+    state: present
+    organization_name: "{{ org1_name }}"
+    organization_msp_id: "{{ org1_msp_id }}"
+    ca_name: "{{ org1_ca_name }}"
+    peer_name: "{{ org1_peer2_name }}"
+  vars_files:
+    - common-vars.yml
+    - org1-vars.yml
+  roles:
+    - ibm.blockchain_platform.endorsing_organization
