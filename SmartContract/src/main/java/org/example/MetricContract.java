@@ -126,8 +126,29 @@ public class MetricContract implements ContractInterface {
 
         //conneted for testing purposes// should be uncommented for production uses
         //if (Boolean.valueOf(provider.getValdityOfSLA())) {
-            if (!f && ts < 1 && !ae && ac) {
+            if (!f && !ae && ac) {
                 violationKey = "0002";
+                complianceStatus = false;
+            } else if (!f && ae && !ac) {
+                violationKey = "0003";
+                complianceStatus = false;
+            } else if (!f && !ae && !ac) {
+                violationKey = "0004";
+                complianceStatus = false;
+            } else if (f && ts <= 3 && !ae && ac) {
+                violationKey = "0005";
+                complianceStatus = false;
+            } else if (f && ts > 3 && ae && ac) {
+                violationKey = "0006";
+                complianceStatus = false;
+            } else if (f && ts > 3 && !ae && ac) {
+                violationKey = "0007";
+                complianceStatus = false;
+            } else if (f && ts > 3 && ae && !ac) {
+                violationKey = "0008";
+                complianceStatus = false;
+            } else if (f && ts > 3 && !ae && !ac) {
+                violationKey = "0009";
                 complianceStatus = false;
             }
 

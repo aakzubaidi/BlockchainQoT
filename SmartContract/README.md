@@ -27,7 +27,7 @@
 ```json
 {
   "ProviderID": "0001",
-  "fire": "false",
+  "fire": "true",
   "processingTime": "0.5",
   "edgeAvailability": "false",
   "serverAvailability": "true"

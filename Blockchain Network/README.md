@@ -5,6 +5,8 @@
 ```
 ## access containers
 http://d3me.net:9000/#!/1/docker/containers/5623237399f682ae0629fd39ab63fac1e10b435dd74e69b99e9ce65b30464bfe
+username: admin
+password: 12345678
 ## access Blockchain (Hyperledger fabric dashboard)
 http://d3me.net:3000/d/monitor/hyperledger-fabric-monitoring?orgId=1&refresh=5s
 ## access Benchmarking Dashboard (Hyperledger caliper)
