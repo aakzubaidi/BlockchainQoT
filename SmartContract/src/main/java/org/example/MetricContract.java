@@ -110,10 +110,10 @@ public class MetricContract implements ContractInterface {
 
     // clean
     @Transaction()
-    public void clean(Context ctx, String providerKey, String violationKey, String Deposite) {
+    public void clean(Context ctx, String providerKey, String violationKey, String Deposite, String maxTolerance, String Penalty) {
         boolean exists = Exists(ctx, violationKey);
-        if (exists) {
-            throw new RuntimeException("The violation category " + violationKey + " already exists");
+        if (!exists) {
+            throw new RuntimeException("The violation category " + violationKey + " does not exists");
         }
 
         exists = Exists(ctx, providerKey);
@@ -129,14 +129,14 @@ public class MetricContract implements ContractInterface {
 
 
         ViolationCategory violationCategory = ViolationCategory
-                .fromJSONString(new String(ctx.getStub().getState(providerKey), UTF_8));
+                .fromJSONString(new String(ctx.getStub().getState(violationKey), UTF_8));
 
         violationCategory.setCategoryName(violationCategory.getCategoryName());
         violationCategory.setProviderKey(providerKey);
         double deposite = Double.valueOf(Deposite);
-        double p = deposite * Double.valueOf(violationCategory.getPenality());
+        double p = deposite * Double.valueOf(Penalty);
         violationCategory.setPenality(String.valueOf(p));
-        violationCategory.setMaxTolerance(violationCategory.getMaxTolerance());
+        violationCategory.setMaxTolerance(maxTolerance);
         violationCategory.setViolationRate("0");
         violationCategory.setViolationsCounter("0");
 
@@ -145,7 +145,7 @@ public class MetricContract implements ContractInterface {
     }
 
 
-    
+
     // Naive Approach
     @Transaction()
     public String evaluateComplianceLegacy(Context ctx, String ProviderID, String fire, String processingTime,
