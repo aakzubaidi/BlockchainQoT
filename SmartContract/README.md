@@ -26,9 +26,10 @@
 
 ```json
 {
+  "deltaID": "0003",
   "ProviderID": "0001",
-  "fire": "true",
-  "processingTime": "0.5",
+  "fire": "false",
+  "processingTime": "false",
   "edgeAvailability": "false",
   "serverAvailability": "true"
 }
