@@ -17,7 +17,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 import com.owlike.genson.Genson;
 
-@Contract(name = "MetricContract", info = @Info(title = "Metric contract", description = "My Smart Contract", version = "0.0.1", license = @License(name = "Apache-2.0", url = ""), contact = @Contact(email = "BlockchainQoT@example.com", name = "BlockchainQoT", url = "http://BlockchainQoT.me")))
+@Contract(name = "MetricContract", info = @Info(title = "Metric contract", description = "My Smart Contract", version = "0.0.6", license = @License(name = "Apache-2.0", url = ""), contact = @Contact(email = "BlockchainQoT@example.com", name = "BlockchainQoT", url = "http://BlockchainQoT.me")))
 @Default
 public class MetricContract implements ContractInterface {
     public MetricContract() {
