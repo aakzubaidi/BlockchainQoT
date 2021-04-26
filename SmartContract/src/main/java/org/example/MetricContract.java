@@ -108,8 +108,47 @@ public class MetricContract implements ContractInterface {
         ctx.getStub().putState(violationKey, violationCategory.toJSONString().getBytes(UTF_8));
     }
 
+    // clean
     @Transaction()
-    public String evaluateCompliance(Context ctx, String ProviderID, String fire, String processingTime,
+    public void clean(Context ctx, String providerKey, String violationKey, String Deposite) {
+        boolean exists = Exists(ctx, violationKey);
+        if (exists) {
+            throw new RuntimeException("The violation category " + violationKey + " already exists");
+        }
+
+        exists = Exists(ctx, providerKey);
+        if (!exists) {
+            throw new RuntimeException("The provider " + providerKey + " does not exists");
+        }
+
+        Provider provider = Provider.fromJSONString(new String(ctx.getStub().getState(providerKey), UTF_8));
+        provider.setName(provider.getName());
+        provider.setDeposit(Deposite);
+        provider.setCompliantCases("0");
+        provider.setValdityOfSLA("true");
+
+
+        ViolationCategory violationCategory = ViolationCategory
+                .fromJSONString(new String(ctx.getStub().getState(providerKey), UTF_8));
+
+        violationCategory.setCategoryName(violationCategory.getCategoryName());
+        violationCategory.setProviderKey(providerKey);
+        double deposite = Double.valueOf(Deposite);
+        double p = deposite * Double.valueOf(violationCategory.getPenality());
+        violationCategory.setPenality(String.valueOf(p));
+        violationCategory.setMaxTolerance(violationCategory.getMaxTolerance());
+        violationCategory.setViolationRate("0");
+        violationCategory.setViolationsCounter("0");
+
+        ctx.getStub().putState(providerKey, violationCategory.toJSONString().getBytes(UTF_8));
+        ctx.getStub().putState(violationKey, violationCategory.toJSONString().getBytes(UTF_8));
+    }
+
+
+    
+    // Naive Approach
+    @Transaction()
+    public String evaluateComplianceLegacy(Context ctx, String ProviderID, String fire, String processingTime,
             String edgeAvailability, String serverAvailability) {
         boolean exists = Exists(ctx, ProviderID);
         if (!exists) {
@@ -289,11 +328,13 @@ public class MetricContract implements ContractInterface {
             Deltas deltas = genson.deserialize(result.getStringValue(), Deltas.class);
             if (Integer.valueOf(deltas.getCc()) >= 1) {
                 cc += Integer.valueOf(deltas.getCc());
+                ctx.getStub().delState(result.getKey());
             } else {
                 ViolationCategory violationCategory = ViolationCategory
                         .fromJSONString(new String(ctx.getStub().getState(ViolationCategoryID), UTF_8));
                 p += Double.valueOf(violationCategory.getPenality());
                 vc += Integer.valueOf(deltas.getVc());
+                ctx.getStub().delState(result.getKey());
             }
 
             // queryResults.add(new QueryResult(result.getKey(), deltas));
