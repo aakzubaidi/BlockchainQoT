@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.example.MetricContractTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-05-02T21:47:39" hostname="org1" time="0.787">
+  <properties/>
+  <testcase name="assetRead()" classname="org.example.MetricContractTest" time="0.787"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

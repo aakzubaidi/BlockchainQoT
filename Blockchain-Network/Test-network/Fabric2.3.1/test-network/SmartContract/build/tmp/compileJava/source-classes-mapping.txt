@@ -1,0 +1,12 @@
+org/example/Deltas.java
+ org.example.Deltas
+org/example/QueryResult.java
+ org.example.QueryResult
+org/example/Metric.java
+ org.example.Metric
+org/example/Provider.java
+ org.example.Provider
+org/example/ViolationCategory.java
+ org.example.ViolationCategory
+org/example/MetricContract.java
+ org.example.MetricContract
