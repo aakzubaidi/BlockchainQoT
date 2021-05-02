@@ -1,0 +1,158 @@
+---
+test:
+    name: benchmarking the smart contract
+    description: stressing the smart contract with multiple incident reports and heavy operations
+    workers:
+      type: local
+      number: 1
+    rounds:
+
+      # - label: 1000 transactions f=10 l=100 
+      #   description: Leaner-rate of incidents Report (from monitoring tool)
+      #   txNumber: 1000
+      #   rateControl: 
+      #     type: linear-rate
+      #     opts:
+      #       startingTps: 10
+      #       finishingTps: 100
+
+      #   workload:
+      #     module: benchmarks/SubmitMonitoringMetrics.js
+      #     arguments:
+      #       contractId: slaDR
+
+
+
+
+      # - label: 2000 transactions f=20 l=200 
+      #   description: Leaner-rate of incidents Report (from monitoring tool)
+      #   txNumber: 2000
+      #   rateControl: 
+      #     type: linear-rate
+      #     opts:
+      #       startingTps: 20
+      #       finishingTps: 200
+
+      #   workload:
+      #     module: benchmarks/SubmitMonitoringMetrics.js
+      #     arguments:
+      #       contractId: slaDR
+
+
+
+
+
+      # - label: 3000 transactions f=40 l=400 
+      #   description: Leaner-rate of incidents Report (from monitoring tool)
+      #   txNumber: 3000
+      #   rateControl: 
+      #     type: linear-rate
+      #     opts:
+      #       startingTps: 40
+      #       finishingTps: 400
+
+      #   workload:
+      #     module: benchmarks/SubmitMonitoringMetrics.js
+      #     arguments:
+      #       contractId: slaDR
+
+
+
+
+      # - label: 4000 transactions f=80 l=800 
+      #   description: Leaner-rate of incidents Report (from monitoring tool)
+      #   txNumber: 4000
+      #   rateControl: 
+      #     type: linear-rate
+      #     opts:
+      #       startingTps: 80
+      #       finishingTps: 800
+
+      #   workload:
+      #     module: benchmarks/SubmitMonitoringMetrics.js
+      #     arguments:
+      #       contractId: slaDR  
+            
+            
+
+            
+      - label: 5000 transactions f=160  l=1600
+        description: Leaner-rate of incidents Report (from monitoring tool)
+        txNumber: 5000
+        rateControl: 
+          type: linear-rate
+          opts:
+            startingTps: 160
+            finishingTps: 1600
+        workload:
+          module: benchmarks/SubmitMonitoringMetrics.js
+          arguments:
+            contractId: slaDR   
+ 
+
+
+      # - label: 5000 transactions f=100  l=1000 
+      #   description: Leaner-rate of incidents Report (from monitoring tool)
+      #   txNumber: 5000
+      #   rateControl: 
+      #     type: linear-rate
+      #     opts:
+      #       startingTps: 100
+      #       finishingTps: 1000
+      #   workload:
+      #     module: benchmarks/SubmitMonitoringMetrics.js
+      #     arguments:
+      #       contractId: slaDR 
+
+
+observer:
+  type: prometheus
+  interval: 5
+
+monitors:
+    resource:
+    - module: prometheus
+      options:
+        interval: 5
+        url: "http://localhost:9090"
+        metrics:
+            include: [dev.*, couch, peer, orderer]
+            queries:
+                - name: Endorse Time (s)
+                  query: rate(endorser_propsal_duration_sum{chaincode="slaDR:0.0.1"}[5s])/rate(endorser_propsal_duration_count{chaincode="slaDR:0.0.1"}[5s])
+                  step: 1
+                  label: instance
+                  statistic: avg
+                - name: Max Memory (MB)
+                  query: sum(container_memory_rss{name=~".+"}) by (name)
+                  step: 10
+                  label: name
+                  statistic: max
+                  multiplier: 0.000001
+      charting:
+        polar:
+          metrics: [Max Memory (MB)]
+        bar:
+          metrics: [all]
+    transaction:
+    - module: prometheus-push
+      options:
+        pushInterval: 5
+        pushUrl: "http://localhost:9091"
+
+# monitor:
+#   interval: 1
+#   type: ['docker', 'prometheus']
+#   docker:
+#     containers: ['all']
+#   prometheus:
+#     url: "http://localhost:9090"
+#     push_url: "http://localhost:9091"
+#     metrics:
+#       ignore: [cadvisor, grafana, node-exporter]
+#       include:
+#         Endorse Time (s):
+#           query: rate(endorser_propsal_duration_sum{chaincode="slaDR:0.0.1"}[5s])/rate(endorser_propsal_duration_count{chaincode="slaDR:0.0.1"}[5s])
+#           step: 1
+#           label: instance
+#           statistic: avg

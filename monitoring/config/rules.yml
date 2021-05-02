@@ -1,0 +1,47 @@
+groups:
+- name: Alerting
+  rules:
+  - alert: EdgeDown
+    expr: up{instance="ali-zubaidi.duckdns.org:9321", job="EdgeExporter"} == 0
+    for: 5s
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 seconds.' 
+    labels:
+      severity: 'critical'
+
+  - alert: ServerDown
+    expr: up{instance="46.101.250.30:8010", job="ServerExporter"} == 0
+    for: 5s
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 seconds.' 
+    labels:
+      severity: 'critical'
+
+  - alert: ts
+    expr: (((fire_reported_time{instance="46.101.250.30:8010",job="ServerExporter"} - on(Initi) initialAlert{instance="ali-zubaidi.duckdns.org:9321",job="EdgeExporter"}) < 100 ) > 0) > 5
+    for: 1s
+    annotations:
+      title: 'Breach of QoS(ts)'
+      description: 'Breach of QoS(ts)'
+    labels:
+      severity: 'critical'
+
+  - alert: ConfirmedFire
+    expr: (ConfirmedAlert{instance="ali-zubaidi.duckdns.org:9321", job="EdgeExporter"} > 0) or (fire_confirmed_time{instance="46.101.250.30:8010", job="ServerExporter"} > 0)
+    for: 1s
+    annotations:
+      title: 'ConfirmedFire'
+      description: 'ConfirmedFire'
+    labels:
+      severity: 'critical'
+
+  - alert: processingAtEdge
+    expr: (ConfirmedAlert{instance="ali-zubaidi.duckdns.org:9321", job="EdgeExporter"}-initialAlert{instance="ali-zubaidi.duckdns.org:9321", job="EdgeExporter"}) > 1
+    for: 1s
+    annotations:
+      title: 'Instance {{ $labels.instance }} down'
+      description: '{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 5 seconds.'
+    labels:
+      severity: 'critical'
