@@ -11,7 +11,10 @@
   "dependencies": {
     "@hyperledger/caliper-cli": "^0.4.2",
     "fabric-ca-client": "^2.2.3",
-    "fabric-network": "^2.2.3"
+    "fabric-client": "^1.4.14",
+    "fabric-common": "^2.1.0",
+    "fabric-network": "^2.2.3",
+    "fabric-protos": "^2.2.5"
   },
   "description": ""
 }

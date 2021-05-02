@@ -134,7 +134,7 @@
             <ul>
                 <h3>&nbspBenchmark results</h3>
                 <li><a href="#benchmarksummary">Summary</a></li>
-                    <li><a href="#5000 transactions f&#x3D;160  l&#x3D;1600">5000 transactions f&#x3D;160  l&#x3D;1600</a></li>
+                    <li><a href="#1000 transactions f&#x3D;10 l&#x3D;100">1000 transactions f&#x3D;10 l&#x3D;100</a></li>
             </ul>
             <ul>
                 <h3>&nbspSystem under test</h3>
@@ -157,29 +157,29 @@
                     </tr>
 
                     <tr>
-                         <td>5000 transactions f&#x3D;160  l&#x3D;1600</td> <td>4926</td> <td>74</td> <td>161.2</td> <td>30.46</td> <td>0.20</td> <td>14.51</td> <td>98.5</td>
+                         <td>1000 transactions f&#x3D;10 l&#x3D;100</td> <td>100</td> <td>0</td> <td>17.9</td> <td>2.29</td> <td>0.11</td> <td>1.27</td> <td>15.4</td>
                     </tr>
                 </table>
             </div>
-            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="5000 transactions f&#x3D;160  l&#x3D;1600">
-                <h2>Benchmark round: 5000 transactions f&#x3D;160  l&#x3D;1600</h2>
+            <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;" id="1000 transactions f&#x3D;10 l&#x3D;100">
+                <h2>Benchmark round: 1000 transactions f&#x3D;10 l&#x3D;100</h2>
                 <p>Leaner-rate of incidents Report (from monitoring tool)</p>
                 <pre style="overflow: visible;white-space: pre-wrap;max-height:100%;">rateControl:
   type: linear-rate
   opts:
-    startingTps: 160
-    finishingTps: 1600
+    startingTps: 10
+    finishingTps: 100
 </pre>
-                        <h3>Performance metrics for 5000 transactions f&#x3D;160  l&#x3D;1600</h3>
+                        <h3>Performance metrics for 1000 transactions f&#x3D;10 l&#x3D;100</h3>
                             <table style="min-width: 100%;">
                                 <tr>
                                      <th>Name</th> <th>Succ</th> <th>Fail</th> <th>Send Rate (TPS)</th> <th>Max Latency (s)</th> <th>Min Latency (s)</th> <th>Avg Latency (s)</th> <th>Throughput (TPS)</th>
                                 </tr>
                                 <tr>
-                                     <td>5000 transactions f&#x3D;160  l&#x3D;1600</td> <td>4926</td> <td>74</td> <td>161.2</td> <td>30.46</td> <td>0.20</td> <td>14.51</td> <td>98.5</td>
+                                     <td>1000 transactions f&#x3D;10 l&#x3D;100</td> <td>100</td> <td>0</td> <td>17.9</td> <td>2.29</td> <td>0.11</td> <td>1.27</td> <td>15.4</td>
                                 </tr>
                             </table>
-                        <h3>Resource utilization for 5000 transactions f&#x3D;160  l&#x3D;1600</h3>
+                        <h3>Resource utilization for 1000 transactions f&#x3D;10 l&#x3D;100</h3>
             </div>
 
             <div style="border-bottom: 1px solid #d9d9d9; padding-bottom: 10px;">
@@ -193,14 +193,14 @@ workers:
   type: local
   number: 1
 rounds:
-  - label: 5000 transactions f&#x3D;160  l&#x3D;1600
+  - label: 1000 transactions f&#x3D;10 l&#x3D;100
     description: Leaner-rate of incidents Report (from monitoring tool)
-    txNumber: 5000
+    txNumber: 100
     rateControl:
       type: linear-rate
       opts:
-        startingTps: 160
-        finishingTps: 1600
+        startingTps: 10
+        finishingTps: 100
     workload:
       module: benchmarks&#x2F;SubmitMonitoringMetrics.js
       arguments:

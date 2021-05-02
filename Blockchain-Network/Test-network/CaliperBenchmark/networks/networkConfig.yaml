@@ -22,9 +22,9 @@ organizations:
       certificates:
       - name: 'User1@org1.example.com'
         clientPrivateKey:
-          path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/d8e73171d4b473e311539fda0e8342c19be34551dce5c59cf800967bb5879ab7_sk'
+          path: '../Fabric-Network2.3.1/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/ab09cd81dfa0937d52e0e6d3ec2667e92912968fe82871ff49722e0f9f5d3e37_sk'
         clientSignedCert:
-          path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem'
+          path: '../Fabric-Network2.3.1/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem'
     connectionProfile:
-      path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+      path: '../Fabric-Network2.3.1/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
       discover: true

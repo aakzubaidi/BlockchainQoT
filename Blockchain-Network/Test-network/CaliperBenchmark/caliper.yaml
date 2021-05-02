@@ -3,3 +3,8 @@ caliper:
     gateway:
       localhost: true
       enabled: true
+      discovery: false
+    timeout:
+      invokeorquery: 600000
+      contractinstantiate: 600000
+      contractinstantiateevent: 600000
