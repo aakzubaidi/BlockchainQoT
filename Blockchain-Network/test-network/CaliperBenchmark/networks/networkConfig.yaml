@@ -1,0 +1,30 @@
+name: Testing QoSenforce smart contract deployed to IBM cloud over k8s
+version: "2.0.0"
+
+info:
+  Version: HLF 2.2.x 
+  Size: 2 Orgs with 2 Peers
+  Orderer: Raft
+  Distribution: 3 orderers
+  StateDB: CouchDB
+
+caliper:
+  blockchain: fabric
+
+channels:
+  - channelName: mychannel
+    contracts:
+    - id: slaDR
+
+organizations:
+  - mspid: Org1MSP
+    identities:
+      certificates:
+      - name: 'User1@org1.example.com'
+        clientPrivateKey:
+          path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/keystore/d8e73171d4b473e311539fda0e8342c19be34551dce5c59cf800967bb5879ab7_sk'
+        clientSignedCert:
+          path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/users/User1@org1.example.com/msp/signcerts/cert.pem'
+    connectionProfile:
+      path: '../fabric-samples/test-network/organizations/peerOrganizations/org1.example.com/connection-org1.yaml'
+      discover: true

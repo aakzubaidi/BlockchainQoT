@@ -1,4 +1,0 @@
-org/example/MetricContractTest.java
- org.example.MetricContractTest
- org.example.MetricContractTest$AssetExists
- org.example.MetricContractTest$AssetUpdates

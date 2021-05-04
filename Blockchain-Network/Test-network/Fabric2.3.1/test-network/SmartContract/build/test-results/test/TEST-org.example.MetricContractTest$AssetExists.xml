@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="org.example.MetricContractTest$AssetExists" tests="3" skipped="0" failures="0" errors="0" timestamp="2021-05-02T21:47:40" hostname="org1" time="0.01">
-  <properties/>
-  <testcase name="noProperAsset()" classname="org.example.MetricContractTest$AssetExists" time="0.003"/>
-  <testcase name="noKey()" classname="org.example.MetricContractTest$AssetExists" time="0.002"/>
-  <testcase name="assetExists()" classname="org.example.MetricContractTest$AssetExists" time="0.002"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
