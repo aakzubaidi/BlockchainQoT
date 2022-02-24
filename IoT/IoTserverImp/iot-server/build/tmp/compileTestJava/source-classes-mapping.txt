@@ -1,0 +1,2 @@
+com/iot/server/iotserver/IotServerApplicationTests.java
+ com.iot.server.iotserver.IotServerApplicationTests
