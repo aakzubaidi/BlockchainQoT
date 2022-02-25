@@ -1,0 +1,90 @@
+---
+test:
+    name: Assess Compliance and Clean
+    description: stressing the smart contract with multiple incident reports and heavy operations
+    workers:
+      type: local
+      number: 1
+    rounds:
+      - label: Assess Compliance from deltas
+        description: Compliance assessement 
+        txNumber: 1
+        rateControl: 
+          type: linear-rate
+          opts:
+            startingTps: 10
+            finishingTps": 100
+
+        workload:
+          module: benchmarks/ComplianceAssessment.js
+          arguments:
+            contractId: slaDR
+
+            
+      - label: Reset Records
+        description: Resest records to default (prepare for a new experiment) 
+        txNumber: 1
+        rateControl: 
+          type: linear-rate
+          opts:
+            startingTps: 10
+            finishingTps": 100
+
+        workload:
+          module: benchmarks/clean.js
+          arguments:
+            contractId: slaDR
+
+
+
+observer:
+  type: prometheus
+  interval: 5
+
+monitors:
+    resource:
+    - module: prometheus
+      options:
+        interval: 5
+        url: "http://localhost:9090"
+        metrics:
+            include: [dev.*, couch, peer, orderer]
+            queries:
+                - name: Endorse Time (s)
+                  query: rate(endorser_propsal_duration_sum{chaincode="slaDR:1.0.0"}[30s])/rate(endorser_propsal_duration_count{chaincode="slaDR:1.0.0"}[30s])
+                  step: 1
+                  label: instance
+                  statistic: avg
+                - name: Max Memory (MB)
+                  query: sum(container_memory_rss{name=~".+"}) by (name)
+                  step: 10
+                  label: name
+                  statistic: max
+                  multiplier: 0.000001
+      charting:
+        polar:
+          metrics: [Max Memory (MB)]
+        bar:
+          metrics: [all]
+    transaction:
+    - module: prometheus-push
+      options:
+        pushInterval: 5
+        pushUrl: "http://localhost:9091"
+
+# monitor:
+#   interval: 1
+#   type: ['docker', 'prometheus']
+#   docker:
+#     containers: ['all']
+#   prometheus:
+#     url: "http://localhost:9090"
+#     push_url: "http://localhost:9091"
+#     metrics:
+#       ignore: [cadvisor, grafana, node-exporter]
+#       include:
+#         Endorse Time (s):
+#           query: rate(endorser_propsal_duration_sum{chaincode="slaDR:0.0.1"}[5s])/rate(endorser_propsal_duration_count{chaincode="slaDR:0.0.1"}[5s])
+#           step: 1
+#           label: instance
+#           statistic: avg

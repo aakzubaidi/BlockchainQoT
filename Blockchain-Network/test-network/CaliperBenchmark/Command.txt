@@ -1,0 +1,29 @@
+
+npm init -y
+
+-------
+
+npm install --only=prod \
+    @hyperledger/caliper-cli
+
+
+ ------
+
+
+npx caliper bind --caliper-bind-sut fabric:2.2
+
+-----
+## IBM
+npx caliper launch manager \
+--caliper-workspace . \
+--caliper-benchconfig benchmarks/config.yaml \
+--caliper-networkconfig networks/networkConfig.yaml --caliper-flow-only-test --caliper-fabric-gateway-usegateway
+
+
+##VMware server
+
+npx caliper launch manager \
+--caliper-workspace . \
+--caliper-benchconfig benchmarks/config.yaml \
+--caliper-networkconfig networks/networkConfig.yaml --caliper-flow-only-test --caliper-fabric-gateway-enabled
+

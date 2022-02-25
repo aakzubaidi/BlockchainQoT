@@ -1,5 +1,5 @@
 FROM openjdk:17-ea-11-jdk-slim
-MAINTAINER Muhammed Alzahrani
+MAINTAINER Ali Alzubaidi
 
 RUN apt update && apt install -y curl
 

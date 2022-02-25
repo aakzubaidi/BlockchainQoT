@@ -1,5 +1,0 @@
-caliper:
-  fabric:
-    gateway:
-      localhost: true
-      enabled: true
